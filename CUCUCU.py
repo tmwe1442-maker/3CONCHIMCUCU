@@ -5,17 +5,16 @@ import cv2
 import numpy as np 
 import math
 
-############## PARAMETERS #############
-fspeed = 117 / 10 # Forward speed
-aspeed = 360 / 10 # Angular speed
+############# PARAMETERS #############
+fspeed = 117 / 10 # Forward speed (cm/s)
+aspeed = 360 / 10 # Angular speed (degrees/s)
 interval = 0.25 
 
 dinterval = fspeed * interval
 ainterval = aspeed * interval 
-#######################################
+######################################
 
 x, y = 500, 500 
-a = 0
 yaw = 0
 points = []
 global img 
@@ -32,7 +31,7 @@ dr.init()
 def getKeyboardInput():
     lr, fb, ud, yv = 0, 0, 0, 0
     speed = 50 
-    global yaw, x, y, a
+    global yaw, x, y
     d = 0
     move_angle = 0 
     moving = False
@@ -116,6 +115,7 @@ while True:
             cv2.imshow("TELLO'S CAMERA", img_cam)
     except Exception as e:
         print("CAMERA ERROR:", e)
+    # MAP
     img_map = np.zeros((1000, 1000, 3), np.uint8)
     if len(points) == 0 or points[-1] != (vals[4], vals[5]):
         points.append((vals[4], vals[5]))
