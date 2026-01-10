@@ -14,7 +14,7 @@ dinterval = fspeed * interval
 ainterval = aspeed * interval 
 ######################################
 
-x, y = 500, 500 
+x, y = 500, 500     
 yaw = 0
 points = []
 global img 
@@ -78,13 +78,11 @@ def getKeyboardInput():
     
     # CAPTURE IMAGE FOR NAVIGATION
     if dr.getKey("c"): 
-        cv2.imwrite(f'Resources/Image/{time.time()}.jpg', img_cam)
-
-
-    time.sleep(interval) # REAL TIME DELAY 
-    
+        cv2.imwrite(f'Resources/Image/{time.time()}.jpg', img_cam)\
+            
     # OXY COORDINATES 
     if moving:
+        time.sleep(interval) # REAL TIME DELAY 
         angle_rad = math.radians(yaw + move_angle)        
         x += int(d * math.cos(angle_rad))
         y += int(d * math.sin(angle_rad))
@@ -115,6 +113,7 @@ while True:
             cv2.imshow("TELLO'S CAMERA", img_cam)
     except Exception as e:
         print("CAMERA ERROR:", e)
+
     # MAP
     img_map = np.zeros((1000, 1000, 3), np.uint8)
     if len(points) == 0 or points[-1] != (vals[4], vals[5]):
